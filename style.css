@@ -1,0 +1,231 @@
+:root {
+  --fond: #14110f;
+  --surface: #1e1a17;
+  --surface-2: #29231f;
+  --trait: #3a322c;
+  --texte: #f5ede1;
+  --doux: #b3a697;
+  --accent: #ee7b3c;
+  --accent-fonce: #c95c22;
+  --sur-accent: #1a0f08;
+  --vert: #2fbf6b;
+  --rayon: 20px;
+  --titre: "Fraunces", Georgia, serif;
+  --corps: "DM Sans", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font: 400 16px/1.45 var(--corps);
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 16px 120px;
+  min-height: 100vh;
+}
+
+/* ── En-tête ───────────────────────────── */
+.entete { padding: 14px 0 6px; }
+.entete-ligne { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+.table {
+  font-size: 13px; font-weight: 500; color: var(--doux);
+  border: 1px solid var(--trait); border-radius: 99px; padding: 5px 12px;
+}
+.table:empty { visibility: hidden; }
+.salut { margin-top: 18px; color: var(--accent); font-weight: 500; font-size: 14px; letter-spacing: .02em; }
+h1 { font: 700 44px/1.02 var(--titre); letter-spacing: -.02em; margin-top: 2px; text-wrap: balance; }
+.slogan { color: var(--doux); margin-top: 6px; }
+
+.btn-rond {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--surface); border: 1px solid var(--trait);
+}
+
+.recherche {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 20px; padding: 0 16px; height: 50px;
+  background: var(--surface); border: 1px solid var(--trait); border-radius: 99px;
+  color: var(--doux);
+}
+.recherche:focus-within { border-color: var(--accent); }
+.recherche input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: var(--texte); }
+.recherche input::placeholder { color: var(--doux); }
+
+/* ── Catégories ────────────────────────── */
+.categories {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; gap: 8px; overflow-x: auto;
+  margin: 0 -16px; padding: 12px 16px;
+  background: linear-gradient(var(--fond) 82%, transparent);
+  scrollbar-width: none;
+}
+.categories::-webkit-scrollbar { display: none; }
+.cat {
+  flex: none; height: 40px; padding: 0 16px; border-radius: 99px;
+  border: 1px solid var(--trait); color: var(--doux); font-weight: 500; font-size: 14px;
+  white-space: nowrap;
+}
+.cat[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--sur-accent); font-weight: 700; }
+
+/* ── Liste des plats ───────────────────── */
+.section-titre { font: 500 24px/1.2 var(--titre); margin: 18px 0 12px; }
+.grille { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.carte {
+  position: relative; display: flex; flex-direction: column; text-align: left;
+  background: var(--surface); border: 1px solid var(--trait); border-radius: var(--rayon);
+  overflow: hidden;
+}
+.carte-zone { display: block; width: 100%; text-align: left; }
+.carte-vue {
+  aspect-ratio: 1 / .86;
+  background: radial-gradient(circle at 50% 62%, #3b3029 0%, var(--surface) 68%);
+}
+.carte-vue model-viewer { width: 100%; height: 100%; pointer-events: none; --poster-color: transparent; }
+.carte-vue img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.carte-texte { padding: 2px 50px 12px 12px; min-height: 76px; }
+.carte-nom { font-weight: 700; font-size: 15px; line-height: 1.25; padding-right: 2px; }
+.carte-prix { color: var(--accent); font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.badge {
+  position: absolute; top: 10px; left: 10px; z-index: 1;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  background: var(--texte); color: var(--fond); padding: 3px 8px; border-radius: 99px;
+}
+.badge-3d {
+  position: absolute; top: 10px; right: 10px; z-index: 1;
+  font-size: 11px; font-weight: 700; color: var(--doux);
+  border: 1px solid var(--trait); background: rgba(20,17,15,.6); padding: 2px 7px; border-radius: 99px;
+}
+.carte-plus {
+  position: absolute; right: 8px; bottom: 8px;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+}
+.carte-plus span {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: var(--sur-accent); font-size: 22px; font-weight: 700; line-height: 1;
+}
+.vide { color: var(--doux); text-align: center; padding: 48px 0; }
+.pied { color: var(--doux); font-size: 13px; text-align: center; margin-top: 28px; }
+
+.credits { color: var(--doux); font-size: 11px; text-align: center; margin-top: 10px; opacity: .8; }
+
+/* ── Barre de commande ─────────────────── */
+.barre-panier {
+  position: fixed; z-index: 10; left: 50%; transform: translateX(-50%);
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  width: min(488px, calc(100% - 32px)); height: 58px; padding: 0 18px 0 10px;
+  display: flex; align-items: center; gap: 12px;
+  background: var(--accent); color: var(--sur-accent); font-weight: 700;
+  border-radius: 99px; box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+.barre-nb {
+  min-width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--sur-accent); color: var(--texte); font-variant-numeric: tabular-nums;
+}
+.barre-total { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* ── Feuilles (fiche plat, commande, QR) ─ */
+.voile {
+  position: fixed; inset: 0; z-index: 20;
+  background: rgba(8,6,5,.72);
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: fondu .2s ease-out;
+}
+.feuille {
+  position: relative; width: 100%; max-width: 520px; max-height: 94dvh; overflow-y: auto;
+  background: var(--fond); border: 1px solid var(--trait); border-bottom: 0;
+  border-radius: 28px 28px 0 0; padding: 26px 20px calc(22px + env(safe-area-inset-bottom));
+  animation: monte .28s cubic-bezier(.2,.8,.2,1);
+}
+.feuille h2 { font: 700 28px/1.1 var(--titre); letter-spacing: -.01em; padding-right: 52px; text-wrap: balance; }
+.fermer { position: absolute; top: 14px; right: 14px; z-index: 3; }
+@keyframes fondu { from { opacity: 0; } }
+@keyframes monte { from { transform: translateY(40px); opacity: 0; } }
+
+.feuille-plat { padding: 0 0 calc(20px + env(safe-area-inset-bottom)); }
+.scene {
+  position: relative; height: min(46dvh, 400px);
+  background: radial-gradient(circle at 50% 66%, #453830 0%, var(--fond) 70%);
+  border-radius: 28px 28px 0 0; overflow: hidden;
+}
+.scene model-viewer { width: 100%; height: 100%; --poster-color: transparent; --progress-bar-color: var(--accent); }
+.btn-ar {
+  position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+  height: 50px; padding: 0 22px; border-radius: 99px; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--texte); color: var(--fond); font: 700 15px var(--corps);
+  box-shadow: 0 8px 22px rgba(0,0,0,.45);
+}
+.astuce {
+  position: absolute; top: 18px; left: 20px; font-size: 13px; color: var(--doux);
+  pointer-events: none; transition: opacity .3s;
+}
+.astuce.cache { opacity: 0; }
+
+.plat-infos { padding: 18px 20px 0; }
+.plat-titre { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.plat-titre h2 { padding-right: 0; }
+.prix { color: var(--accent); font-weight: 700; font-size: 20px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.plat-desc { color: var(--doux); margin-top: 8px; }
+.puces { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.puces li { font-size: 13px; font-weight: 500; border: 1px solid var(--trait); border-radius: 99px; padding: 5px 12px; }
+.note-ar { margin-top: 14px; font-size: 13px; color: var(--doux); background: var(--surface); border-radius: 12px; padding: 10px 12px; }
+
+.achat { display: flex; gap: 12px; margin-top: 20px; }
+.quantite {
+  display: flex; align-items: center; height: 54px; border-radius: 99px;
+  background: var(--surface); border: 1px solid var(--trait);
+}
+.quantite button { width: 46px; height: 100%; font-size: 22px; }
+.quantite output { min-width: 22px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.btn-principal {
+  flex: 1; height: 54px; border-radius: 99px; padding: 0 20px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--accent); color: var(--sur-accent); font-weight: 700; text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+.btn-principal:active, .barre-panier:active { background: var(--accent-fonce); }
+
+/* ── Commande ──────────────────────────── */
+.lignes { margin-top: 18px; }
+.ligne { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--trait); }
+.ligne-nom { flex: 1; min-width: 0; font-weight: 500; }
+.ligne-nom small { display: block; color: var(--doux); font-weight: 400; font-size: 13px; font-variant-numeric: tabular-nums; }
+.ligne .quantite { height: 44px; }
+.ligne .quantite button { width: 44px; }
+.total { display: flex; justify-content: space-between; align-items: baseline; margin: 18px 0; font-size: 18px; }
+.total strong { font: 700 26px var(--titre); font-variant-numeric: tabular-nums; }
+.btn-wa { display: flex; width: 100%; background: var(--vert); color: #06210f; }
+.btn-wa:active { background: #25a058; }
+.petit { color: var(--doux); font-size: 13px; text-align: center; margin-top: 12px; overflow-wrap: anywhere; }
+
+/* ── QR ────────────────────────────────── */
+.feuille-qr { text-align: center; }
+.feuille-qr h2 { padding: 0 40px; }
+.qr { width: 240px; margin: 22px auto 0; padding: 14px; background: #fff; border-radius: 18px; }
+.qr svg { display: block; width: 100%; height: auto; }
+
+@media (min-width: 560px) {
+  .voile { align-items: center; }
+  .feuille { border-radius: 28px; border-bottom: 1px solid var(--trait); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .voile, .feuille { animation: none; }
+}
